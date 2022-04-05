@@ -2,10 +2,10 @@ Ext.define('CustomApp', { extend: 'Rally.app.App', componentCls: 'app',
 
         launch: function() {
         console.log("Vamos para Bingo!!");
-        this.loadIterations(); 
+        this._loadRallyLazyUsers(); 
         },
 
-loadIterations: function() {
+_loadRallyLazyUsers: function() {
              
         var currentDate = new Date();
 		var currentDate6mLess = new Date(currentDate.setMonth(currentDate.getMonth() - 6));
@@ -16,13 +16,18 @@ loadIterations: function() {
         var RallyLazyUsers = Ext.create('Rally.data.wsapi.Store', {
             model: 'User',
             autoLoad: true,
-            fetch: ['c_EmployeeId', 'UserName', 'LastActiveDate','EmailAddress'],
+            fetch: ['c_EmployeeId', 'UserName', 'LastActiveDate','EmailAddress','Disabled'],
             filters:[
                 {
                         property: 'LastActiveDate',
                         operator: '<=',
                         value: currentDate6mLess
-                }
+                },
+				{
+                        property: 'Disabled',
+                        operator: '=',
+                        value: false
+                },
             ],
             sorters: [
                 {property: '', direction: 'ASC'}
@@ -33,7 +38,8 @@ loadIterations: function() {
                         console.info('ID: ', record.get('c_EmployeeId'), 
                             '  Name: ', record.get('UserName'),                             
                             '  LastActiveDate: ', record.get('LastActiveDate'), 
-                            '  EmailAddress: ', record.get('EmailAddress'));
+                            '  EmailAddress: ', record.get('EmailAddress'),
+							'  Disabled: ', record.get('Disabled'));
                     });
 					  }, scope: this
             }

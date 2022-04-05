@@ -30,19 +30,31 @@ _loadRallyLazyUsers: function() {
                 },
             ],
             sorters: [
-                {property: '', direction: 'ASC'}
+                {property: 'LastActiveDate', direction: 'ASC'}
             ],
             listeners: {
                 load: function(store, data, success) {
-                    Ext.Array.each(data, function(record) {
+                    /*Ext.Array.each(data, function(record) {
                         console.info('ID: ', record.get('c_EmployeeId'), 
                             '  Name: ', record.get('UserName'),                             
                             '  LastActiveDate: ', record.get('LastActiveDate'), 
                             '  EmailAddress: ', record.get('EmailAddress'),
 							'  Disabled: ', record.get('Disabled'));
-                    });
-					  }, scope: this
+                    });*/
+					this._loadGrid (RallyLazyUsers);
+					  },
+				 scope: this
             }
         });        
-}    
+} ,
+_loadGrid: function(myStoryStore) {
+	
+		var myGrid = Ext.create('Rally.ui.grid.Grid', {
+			store: myStoryStore,
+			columnCfgs:  ['c_EmployeeId', 'UserName', 'LastActiveDate','EmailAddress','Disabled']
+		});
+		console.log('myGrid', myGrid);
+		this.add(myGrid);
+		console.log('What is this: ', this);
+	},   
 });

@@ -1,22 +1,19 @@
 Ext.define('CustomApp', { extend: 'Rally.app.App', componentCls: 'app',
 
         launch: function() {
-        console.log("Vamos para Bingo");
+        console.log("Vamos para Bingo!!");
         this.loadIterations(); 
         },
 
 loadIterations: function() {
-        //var millisecondsInDay = 86400000;            
+             
         var currentDate = new Date();
-		var fechamenos6meses = new Date(currentDate.setMonth(currentDate.getMonth() - 6));
-		console.log('Current Date menso 6 meses ',fechamenos6meses);
+		var currentDate6mLess = new Date(currentDate.setMonth(currentDate.getMonth() - 6));
+		console.log('Current Date menso 6 meses ',currentDate6mLess);
 		console.log('Current Date ',currentDate);
-      //  var startDate = new Date(currentDate - millisecondsInDay*90);
-       // var startDateUTC = startDate.toISOString();
-      //  console.log('startDateUTC',startDateUTC);
-      //  console.log('startDate',startDate);
+      
 		
-        var iterations = Ext.create('Rally.data.WsapiDataStore', {
+        var RallyLazyUsers = Ext.create('Rally.data.wsapi.Store', {
             model: 'User',
             autoLoad: true,
             fetch: ['c_EmployeeId', 'UserName', 'LastActiveDate','EmailAddress'],
@@ -24,7 +21,7 @@ loadIterations: function() {
                 {
                         property: 'LastActiveDate',
                         operator: '<=',
-                        value: fechamenos6meses
+                        value: currentDate6mLess
                 }
             ],
             sorters: [

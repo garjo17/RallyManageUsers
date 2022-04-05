@@ -8,9 +8,10 @@ Ext.define('CustomApp', { extend: 'Rally.app.App', componentCls: 'app',
 _loadRallyLazyUsers: function() {
              
         var currentDate = new Date();
+		console.log('Current Date ',currentDate);
 		var currentDate6mLess = new Date(currentDate.setMonth(currentDate.getMonth() - 6));
 		console.log('Current Date menso 6 meses ',currentDate6mLess);
-		console.log('Current Date ',currentDate);
+	
       
 		
         var RallyLazyUsers = Ext.create('Rally.data.wsapi.Store', {

@@ -1,7 +1,7 @@
 Ext.define('CustomApp', { extend: 'Rally.app.App', componentCls: 'app',
 
         launch: function() {
-        console.log("Vamos para Bingo!!");
+        console.log("Vamos para Bingo :) !!");
         this._loadRallyLazyUsers(); 
         },
 
@@ -34,13 +34,13 @@ _loadRallyLazyUsers: function() {
             ],
             listeners: {
                 load: function(store, data, success) {
-                    /*Ext.Array.each(data, function(record) {
+                    Ext.Array.each(data, function(record) {
                         console.info('ID: ', record.get('c_EmployeeId'), 
                             '  Name: ', record.get('UserName'),                             
                             '  LastActiveDate: ', record.get('LastActiveDate'), 
                             '  EmailAddress: ', record.get('EmailAddress'),
 							'  Disabled: ', record.get('Disabled'));
-                    });*/
+                    });
 					this._loadGrid (RallyLazyUsers);
 					  },
 				 scope: this
